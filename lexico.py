@@ -1,7 +1,7 @@
 import re
 
 def escritoCorretamente(palavra):
-    palavrasReservadas = ['programa_SOL', 'loop', 'navegador', '20_min;', 'endereço_meet']
+    palavrasReservadas = ['programa_SOL', 'loop', 'navegador', '20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;', 'endereço_meet',]
     
     if(palavra in palavrasReservadas):
         return True
