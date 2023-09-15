@@ -1,7 +1,7 @@
 import re
 
 def escritoCorretamente(palavra):
-    palavrasReservadas = ['programa_SOL', 'loop', 'navegador', '20_min']
+    palavrasReservadas = ['programa_SOL', 'loop', 'navegador', '20_min;', 'endereço_meet']
     
     if(palavra in palavrasReservadas):
         return True
@@ -9,50 +9,65 @@ def escritoCorretamente(palavra):
          return False
 
 
-palavrasComComentarios = []
+palavrasDoCodigoFonte = []
+palavrasTratadas = []
 linha = 1
+ignorar = False
 
 # Ler o arquivo
-texto = open('texto.txt', 'r')
+texto = open('texto.txt', 'r', encoding='utf-8')
 lista = texto.readlines()
 
 for i in range(0, len(lista)):
     aux = lista[i].split(' ')
-    palavrasComComentarios = palavrasComComentarios + aux
+    palavrasDoCodigoFonte = palavrasDoCodigoFonte + aux
 texto.close()
 
-print(palavrasComComentarios)
+# print(palavrasDoCodigoFonte)
 
-for i in range(0, len(palavrasComComentarios)):
-
-    # verificar identificador
-    if(palavrasComComentarios[i][0].isalpha()):
-
-        for letra in palavrasComComentarios[i]:
-            if(letra == '\n'):
-                    linha += 1
-
-        palavrasComComentarios[i] = palavrasComComentarios[i].split()[0]
-
-        # Verificar se está escrito corretamente
-        if(escritoCorretamente(palavrasComComentarios[i]) == False):
-           print('Erro com a palavra ' + '\'' + palavrasComComentarios[i] + '\'' + ' na linha ' + str(linha))
-           break
-
-    # Verificar digito
-    if(palavrasComComentarios[i][0].isdigit()):
-        for letra in palavrasComComentarios[i]:
-            if(letra == '\n'):
-                    linha += 1
-
-        palavrasComComentarios[i] = palavrasComComentarios[i].split()[0]
-
-        # Verificar se está escrito corretamente
-        if((escritoCorretamente(palavrasComComentarios[i]) == False) and (palavrasComComentarios[i].isdigit() == False)):
-           print('Erro com a palavra ' + '\'' + + palavrasComComentarios[i] + '\'' + ' na linha ' + str(linha))
-           break
+for i in range(0, len(palavrasDoCodigoFonte)):
 
     # Remover Comentários
-    
+    if(palavrasDoCodigoFonte[i][0] in '//' or ignorar):
+        ignorar = True
 
-print(linha)
+        for letra in palavrasDoCodigoFonte[i]:
+            if(letra == '\n'):
+                    linha += 1
+                    ignorar = False
+
+
+    # verificar identificador
+    elif(palavrasDoCodigoFonte[i][0].isalpha()):
+
+        for letra in palavrasDoCodigoFonte[i]:
+            if(letra == '\n'):
+                    linha += 1
+
+        palavrasDoCodigoFonte[i] = palavrasDoCodigoFonte[i].split()[0]
+        palavrasTratadas.append(palavrasDoCodigoFonte[i].split()[0])
+
+        # Verificar se está escrito corretamente
+        if(escritoCorretamente(palavrasDoCodigoFonte[i]) == False):
+            print('Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha))
+            break
+
+    # Verificar digito
+    elif(palavrasDoCodigoFonte[i][0].isdigit()):
+        for letra in palavrasDoCodigoFonte[i]:
+            if(letra == '\n'):
+                    linha += 1
+
+        palavrasDoCodigoFonte[i] = palavrasDoCodigoFonte[i].split()[0]
+        palavrasTratadas.append(palavrasDoCodigoFonte[i].split()[0])
+
+        # Verificar se está escrito corretamente
+        if((escritoCorretamente(palavrasDoCodigoFonte[i]) == False) and (palavrasDoCodigoFonte[i].isdigit() == False)):
+            print('Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha))
+            break
+
+
+print()
+print("Quantidade de linhas: " + str(linha))
+# print(palavrasDoCodigoFonte)
+print(palavrasTratadas)
