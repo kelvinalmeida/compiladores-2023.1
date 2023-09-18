@@ -33,21 +33,54 @@ def vezes():
         error()
 
 def sequencia():
-    listasTempos = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
+    listasTempos = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;',]
 
     lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
 
+    # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in listasTempos)):
-        matchLookAhead('navegador')
+        explore()
+        # present()
+        # interact()
+        # critique()
         
     # elif()
 
+
+def explore():
+    if(lookahead == 'navegador'):
+        matchLookAhead('navegador')
+        tempo()
+        print('Executando Navegador em ' + str(lookahead))
+    else:
+        error()
+
+def tempo():
+    
+    if(lookahead == '20_min;'):
+        matchLookAhead('20_min;')
+    elif(lookahead == '1_dia;'):
+        matchLookAhead('1_dia;')
+    elif(lookahead == '2_dias;'):
+        matchLookAhead('2_dias;')
+    elif(lookahead == 'sem_limite;'):
+        matchLookAhead('sem_limite;')
+    elif(lookahead == '15_min;'):
+        matchLookAhead('15_min;')
+    else:
+        error()
+
 def matchLookAhead(token):
     if(token == lookahead):
-        count += 1
-        lookahead = lexico.palavrasTratadas[count]
+        if(count < len(lexico.palavrasTratadas)):
+            count += 1
+            lookahead = lexico.palavrasTratadas[count]
     else:
         error()
 
 def error():
     print('Erro Sintatico')
+
+
+# lexico()
+parse()
