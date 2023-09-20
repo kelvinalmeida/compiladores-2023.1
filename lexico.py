@@ -68,6 +68,7 @@ for i in range(0, len(palavrasDoCodigoFonte)):
 
 
 print()
-print("Quantidade de linhas: " + str(linha))
+print("**Quantidade de linhas do código fonte: " + str(linha))
 # print(palavrasDoCodigoFonte)
-print(palavrasTratadas)
+print("**Palavras do Codigo fonte: " + str(palavrasTratadas))
+print()
