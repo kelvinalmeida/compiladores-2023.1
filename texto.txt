@@ -1,3 +1,2 @@
 programa_SOL loop 1
-// apresentar uma vez via videoconferência pelo link do meet
-navegador endereço_meet 20_min;
+navegador sem_limite; // navegar na Web sem limite de tempo

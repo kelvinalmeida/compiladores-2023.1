@@ -48,6 +48,7 @@ def sequencia():
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
         fases_EPIC()
 
+    # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
         present()
         tempo()
