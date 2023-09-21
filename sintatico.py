@@ -40,7 +40,9 @@ def vezes():
 def sequencia():
     global lookahead
     fase_EPIC = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
-    presentList = ['link_whatsapp_web', 'link_video', 'endereço_meet']
+    presentList = ['link_link_whatsapp_web', 'link_video', 'endereço_meet']
+
+
 
     lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
 
@@ -57,9 +59,9 @@ def sequencia():
 
 def fases_EPIC():
     explore()
-    # present()
-    # interact()
-    # critique()
+    present()
+    interact()
+    critique()
 
 def explore():
     global lookahead
@@ -95,20 +97,66 @@ def present():
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
-        # visualizarPDF()
-        # visuzlizarVideo()
-        videoConferencia()
+        if(lookahead == 'link_pdf'):
+            matchLookAhead('link_pdf')
+            print('executar link_pdf.')
+            tempo()
+        elif(lookahead == 'link_video'):
+            matchLookAhead('link_video')            
+            print('executar link_video.')
+            tempo()
+        elif(lookahead == 'endereço_meet'):
+            matchLookAhead('endereço_meet')            
+            print('executar endereço_meet.')
+            tempo()
+        else:
+            error()
     else:
         error()
 
-def videoConferencia():
+def interact():
     global lookahead
-    if(lookahead == 'endereço_meet'):
-        matchLookAhead('endereço_meet')
-        print("Abrindo Vídeo conferencia no meet.")
+    if(lookahead == 'navegador'):
+        matchLookAhead('navegador')
+        if(lookahead == 'link_whatsapp_web'):
+            matchLookAhead('link_whatsapp_web')
+            print('executar link_whatsapp_web.')
+            tempo()
+        elif(lookahead == 'link_email'):
+            matchLookAhead('link_email')
+            print('executar link_email.')
+            tempo()
+
+        elif(lookahead == 'endereço_meet'):
+            matchLookAhead('endereço_meet')
+            print('executar endereço_meet.')
+            tempo()
+        else:
+            error()
     else:
         error()
 
+def critique():
+    global lookahead
+    if(lookahead == 'navegador'):
+        matchLookAhead('navegador')
+        if(lookahead == 'link_whatsapp_web'):
+            matchLookAhead('link_whatsapp_web')
+            print('executar link_whatsapp_web.')
+            tempo()
+        elif(lookahead == 'link_email'):
+            matchLookAhead('link_email')
+            print('executar link_email.')
+            tempo()
+
+        elif(lookahead == 'endereço_meet'):
+            matchLookAhead('endereço_meet')
+            print('executar endereço_meet.')
+            tempo()
+        else:
+            error()
+    else:
+        error()
 
 def matchLookAhead(token):
     global lookahead
