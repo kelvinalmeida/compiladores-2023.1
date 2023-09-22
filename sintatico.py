@@ -1,5 +1,6 @@
 
 import lexico
+import sys # Para parar o programa apos um erro.
 
 count = 0
 lookahead = lexico.palavrasTratadas[count]
@@ -40,7 +41,7 @@ def vezes():
 def sequencia():
     global lookahead
     fase_EPIC = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
-    presentList = ['link_link_whatsapp_web', 'link_video', 'endereço_meet']
+    presentList = ['link_pdf','link_video', 'endereço_meet']
 
 
 
@@ -49,7 +50,6 @@ def sequencia():
     # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
         fases_EPIC()
-
     # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
         present()
@@ -65,10 +65,20 @@ def fases_EPIC():
 
 def explore():
     global lookahead
-    if(lookahead == 'navegador'):
+    global count
+    presentList = ['link_pdf','link_video', 'endereço_meet']
+
+    lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+
+    if(lookaheadPreeditivo in presentList):
+        return
+    elif(lookahead == 'navegador'):
         matchLookAhead('navegador')
         print('Executando o navegador')
         tempo()
+        
+        # Recursão da explore
+        explore()
     else:
         error()
 
@@ -170,6 +180,8 @@ def matchLookAhead(token):
 
 def error():
     print('Erro Sintatico')
+    print()
+    sys.exit()
 
 
 # lexico()
