@@ -57,7 +57,6 @@ def sequencia():
     # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
         present()
-        tempo()
     else:
         error()
 
@@ -84,7 +83,7 @@ def explore():
         matchLookAhead('navegador')
         print('Executando o navegador')
         tempo('navegador')
-        # Recursão da explore
+        # Recursão do explore
         explore()
     else:
         error()
@@ -106,6 +105,7 @@ def tempo(tipo):
     elif(lookahead == 'sem_limite;'):
         matchLookAhead('sem_limite;')
         print('por sem_limite')
+        abrirComandos(tipo, 'sem_limite;')
     elif(lookahead == '15_min;'):
         matchLookAhead('15_min;')
         print('por 15_min')
@@ -129,16 +129,15 @@ def present():
         if(lookahead == 'link_pdf'):
             matchLookAhead('link_pdf')
             print('executar link_pdf.')
-            tempo()
+            tempo('link_pdf')
         elif(lookahead == 'link_video'):
             matchLookAhead('link_video')            
             print('executar link_video.')
-            tempo()
+            tempo('link_video')
         elif(lookahead == 'endereço_meet'):
             matchLookAhead('endereço_meet')            
             print('executar endereço_meet.')
-            abrirVideoConferencia()
-            tempo()
+            tempo('endereço_meet')
         else:
             error()
     else:
@@ -157,17 +156,16 @@ def interact():
         if(lookahead == 'link_whatsapp_web'):
             matchLookAhead('link_whatsapp_web')
             print('executar link_whatsapp_web.')
-            tempo()
+            tempo('link_whatsapp_web')
         elif(lookahead == 'link_email'):
             matchLookAhead('link_email')
             print('executar link_email.')
-            tempo()
+            tempo('link_email')
 
         elif(lookahead == 'endereço_meet'):
             matchLookAhead('endereço_meet')
             print('executar endereço_meet.')
-            abrirVideoConferencia()
-            tempo()
+            tempo('endereço_meet')
         else:
             error()
     else:
@@ -185,17 +183,16 @@ def critique():
         if(lookahead == 'link_whatsapp_web'):
             matchLookAhead('link_whatsapp_web')
             print('executar link_whatsapp_web.')
-            tempo()
+            tempo('link_whatsapp_web')
         elif(lookahead == 'link_email'):
             matchLookAhead('link_email')
             print('executar link_email.')
-            tempo()
+            tempo('link_email')
 
         elif(lookahead == 'endereço_meet'):
             matchLookAhead('endereço_meet')
             print('executar endereço_meet.')
-            abrirVideoConferencia()
-            tempo()
+            tempo('endereço_meet')
         else:
             error()
     else:
@@ -220,6 +217,16 @@ def error():
 def abrirComandos(tipo, tempo):
     if(tipo == 'navegador'):
         abrirNavegador(tempo)
+    elif(tipo == 'link_pdf'):
+        abrirPDF(tempo)
+    elif(tipo == 'link_video'):
+        abrirVideo(tempo)
+    elif(tipo == 'link_whatsapp_web'):
+        abrirWhatsappWeb(tempo)
+    elif(tipo == 'link_email'):
+        abrirEmail(tempo)
+    elif(tipo == 'endereço_meet'):
+        abrirVideoConferencia(tempo)
 
 
 def abrirNavegador(tempo):

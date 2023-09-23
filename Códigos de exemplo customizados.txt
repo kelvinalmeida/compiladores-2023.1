@@ -17,3 +17,14 @@ navegador 15_min;
 navegador link_video 1_dia;
 navegador endereço_meet sem_limite;
 navegador link_whatsapp_web 15_min;
+
+Exemplo customizado 3:
+
+programa_SOL loop 1
+navegador 20_min;
+
+Exemplo customizado 4:
+
+programa_SOL loop 1
+navegador 20_min;
+navegador link_video 1_dia;
