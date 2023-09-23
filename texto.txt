@@ -1,7 +1,2 @@
 programa_SOL loop 1
 navegador 20_min;
-navegador sem_limite;
-navegador 15_min;
-navegador link_video 1_dia;
-navegador endereço_meet sem_limite;
-navegador link_whatsapp_web 15_min;
