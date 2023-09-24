@@ -1,12 +1,12 @@
 Exemplo customizado 1:
 
-programa_SOL loop 1
+programa_SOL loop 2
 navegador 1_dia;
 navegador 20_min;
 navegador 2_dias;
 navegador link_video 1_hora;
 navegador endereço_meet 20_min;
-navegador link_whatsapp_web 15_min;
+navegador link_whatsapp_web sem_limite;
 
 Exemplo customizado 2:
 
@@ -20,7 +20,7 @@ navegador link_whatsapp_web 15_min;
 
 Exemplo customizado 3:
 
-programa_SOL loop 1
+programa_SOL loop 3
 navegador 20_min;
 
 Exemplo customizado 4:

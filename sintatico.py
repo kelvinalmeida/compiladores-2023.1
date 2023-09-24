@@ -8,6 +8,7 @@ driver = webdriver.Chrome()
 
 count = 0
 lookahead = lexico.palavrasTratadas[count]
+vezesLoop = 1
 
 def parse():
     global lookahead
@@ -20,10 +21,19 @@ def parse():
 
 def programa_SOL():
     global lookahead
+    global count
+    global vezesLoop
     if(lookahead == 'loop'):
         matchLookAhead('loop')
-        vezes()
-        sequencia()
+        vezesLoop = vezes()
+
+        for i in range(0, vezesLoop):
+            
+            if(i > 0):
+                lookahead = lexico.palavrasTratadas[3]
+                count = 3
+
+            sequencia()
     else:
         error()
     
@@ -31,14 +41,19 @@ def vezes():
     global lookahead
     if(lookahead == '1'):
         matchLookAhead('1')
+        return 1
     elif(lookahead == '2'):
         matchLookAhead('2')
+        return 2
     elif(lookahead == '3'):
         matchLookAhead('3')
+        return 3
     elif(lookahead == '4'):
         matchLookAhead('4')
+        return 4
     elif(lookahead == '5'):
         matchLookAhead('5')
+        return 5
     else:
         error()
 
@@ -46,8 +61,6 @@ def sequencia():
     global lookahead
     fase_EPIC = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
     presentList = ['link_pdf','link_video', 'endereço_meet']
-
-
 
     lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
 
@@ -232,92 +245,46 @@ def abrirComandos(tipo, tempo):
 def abrirNavegador(tempo):
     global driver
     driver.get("https://google.com/")
-
-    if(tempo == '20_min;'):
-        time.sleep(10)
-    elif(tempo == '1_dia;'):
-        time.sleep(10)
-    elif(tempo == 'sem_limite;'):
-        time.sleep(10)
-    elif(tempo == '15_min;'):
-        time.sleep(10)
-    elif(tempo == '1_hora;'):
-        time.sleep(10)
+    timeSleep(tempo)
 
 def abrirVideoConferencia(tempo):
     global driver
     driver.get("https://meet.google.com/")
-    
-    if(tempo == '20_min;'):
-        time.sleep(10)
-    elif(tempo == '1_dia;'):
-        time.sleep(10)
-    elif(tempo == 'sem_limite;'):
-        time.sleep(10)
-    elif(tempo == '15_min;'):
-        time.sleep(10)
-    elif(tempo == '1_hora;'):
-        time.sleep(10)
+    timeSleep(tempo)
 
 def abrirWhatsappWeb(tempo):
     global driver
     driver.get("https://web.whatsapp.com/")
-    
-    if(tempo == '20_min;'):
-        time.sleep(10)
-    elif(tempo == '1_dia;'):
-        time.sleep(10)
-    elif(tempo == 'sem_limite;'):
-        time.sleep(10)
-    elif(tempo == '15_min;'):
-        time.sleep(10)
-    elif(tempo == '1_hora;'):
-        time.sleep(10)
+    timeSleep(tempo)
 
 def abrirEmail(tempo):
     global driver
     driver.get("https://mail.google.com/")
-    
-    if(tempo == '20_min;'):
-        time.sleep(10)
-    elif(tempo == '1_dia;'):
-        time.sleep(10)
-    elif(tempo == 'sem_limite;'):
-        time.sleep(10)
-    elif(tempo == '15_min;'):
-        time.sleep(10)
-    elif(tempo == '1_hora;'):
-        time.sleep(10)
+    timeSleep(tempo)
 
 def abrirPDF(tempo):
     global driver
     driver.get("https://inc.saude.gov.br/download/50_receitas.pdf")
-    
-    if(tempo == '20_min;'):
-        time.sleep(10)
-    elif(tempo == '1_dia;'):
-        time.sleep(10)
-    elif(tempo == 'sem_limite;'):
-        time.sleep(10)
-    elif(tempo == '15_min;'):
-        time.sleep(10)
-    elif(tempo == '1_hora;'):
-        time.sleep(10)
+    timeSleep(tempo)
 
 def abrirVideo(tempo):
     global driver
     driver.get("https://www.youtube.com/")
-    
+    timeSleep(tempo)
+
+def timeSleep(tempo):
     if(tempo == '20_min;'):
-        time.sleep(10)
+        time.sleep(5)
     elif(tempo == '1_dia;'):
-        time.sleep(10)
+        time.sleep(5)
+    elif(tempo == '2_dias;'):
+        time.sleep(5)
     elif(tempo == 'sem_limite;'):
-        time.sleep(10)
+        time.sleep(5)
     elif(tempo == '15_min;'):
-        time.sleep(10)
+        time.sleep(5)
     elif(tempo == '1_hora;'):
-        time.sleep(10)
+        time.sleep(5)
 
 
 # lexico()
