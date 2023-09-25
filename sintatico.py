@@ -82,7 +82,8 @@ def fases_EPIC():
 def explore():
     global lookahead
     global count
-    presentList = ['link_pdf','link_video', 'endereço_meet']
+    # presentList = ['link_pdf','link_video', 'endereço_meet']
+    presentList = ['20_min;' , '1_hora;' , '1_dia;' , '2_dias;' , 'sem_limite;', '15_min;']
 
 
     if(count + 1 < len(lexico.palavrasTratadas)):
@@ -90,7 +91,7 @@ def explore():
     else:
         return
 
-    if(lookaheadPreeditivo in presentList):
+    if(not (lookaheadPreeditivo in presentList)):
         return
     elif(lookahead == 'navegador'):
         matchLookAhead('navegador')
