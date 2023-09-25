@@ -28,3 +28,16 @@ Exemplo customizado 4:
 programa_SOL loop 1
 navegador 20_min;
 navegador link_video 1_dia;
+
+exemplo customizado 5:
+
+programa_SOL loop 1
+navegador link_video 1_dia;
+
+
+exemplo customizado 6:
+
+programa_SOL loop 1
+navegador 20_min;
+navegador endereço_meet sem_limite;
+navegador link_whatsapp_web 15_min;

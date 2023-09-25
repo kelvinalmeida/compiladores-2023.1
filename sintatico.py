@@ -62,7 +62,11 @@ def sequencia():
     fase_EPIC = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
     presentList = ['link_pdf','link_video', 'endereço_meet']
 
-    lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+    # Verifica se o count não ultrapassa o array de palavrasTratadas
+    if(count + 1 < len(lexico.palavrasTratadas)):
+        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+    else:
+        return
 
     # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
@@ -83,15 +87,17 @@ def explore():
     global lookahead
     global count
     # presentList = ['link_pdf','link_video', 'endereço_meet']
-    presentList = ['20_min;' , '1_hora;' , '1_dia;' , '2_dias;' , 'sem_limite;', '15_min;']
+    explorerList = ['20_min;' , '1_hora;' , '1_dia;' , '2_dias;' , 'sem_limite;', '15_min;']
 
 
+    # Verifica se o count não ultrapassa o array de palavrasTratadas
     if(count + 1 < len(lexico.palavrasTratadas)):
         lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
     else:
         return
 
-    if(not (lookaheadPreeditivo in presentList)):
+    # Se não for explorer RETORNA
+    if(not (lookaheadPreeditivo in explorerList)):
         return
     elif(lookahead == 'navegador'):
         matchLookAhead('navegador')
@@ -135,9 +141,22 @@ def present():
     global lookahead
     global count
 
-    if(count + 1 == len(lexico.palavrasTratadas)):
+    presentList = ['link_pdf' , 'link_video' , 'endereço_meet']
+
+
+    # Verifica se o count não ultrapassa o array de palavrasTratadas
+    if(count + 1 < len(lexico.palavrasTratadas)):
+        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+    else:
         return
 
+    # Se não for present RETORNA
+    if(not (lookaheadPreeditivo in presentList)):
+        return
+
+    # if(count + 1 == len(lexico.palavrasTratadas)):
+    #     return
+    
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
         if(lookahead == 'link_pdf'):
@@ -161,9 +180,21 @@ def interact():
     global lookahead
     global count
 
+    interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
 
-    if(count + 1 == len(lexico.palavrasTratadas)):
+
+    # Verifica se o count não ultrapassa o array de palavrasTratadas
+    if(count + 1 < len(lexico.palavrasTratadas)):
+        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+    else:
         return
+
+    # Se não for interact RETORNA
+    if(not (lookaheadPreeditivo in interactList)):
+        return
+
+    # if(count + 1 == len(lexico.palavrasTratadas)):
+    #     return
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
@@ -189,8 +220,21 @@ def critique():
     global lookahead
     global count
 
-    if(count + 1 == len(lexico.palavrasTratadas)):
+    interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
+
+
+    # Verifica se o count não ultrapassa o array de palavrasTratadas
+    if(count + 1 < len(lexico.palavrasTratadas)):
+        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+    else:
         return
+
+    # Se não for interact RETORNA
+    if(not (lookaheadPreeditivo in interactList)):
+        return
+
+    # if(count + 1 == len(lexico.palavrasTratadas)):
+    #     return
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')

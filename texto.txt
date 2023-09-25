@@ -1,3 +1,1 @@
 programa_SOL loop 1
-navegador 20_min;
-navegador link_video 1_dia;
