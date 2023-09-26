@@ -29,6 +29,7 @@ def programa_SOL():
 
         for i in range(0, vezesLoop):
             
+            # apos a primeira repetição
             if(i > 0):
                 lookahead = lexico.palavrasTratadas[3]
                 count = 3
@@ -61,12 +62,13 @@ def sequencia():
     global lookahead
     fase_EPIC = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
     presentList = ['link_pdf','link_video', 'endereço_meet']
+    
 
     # Verifica se o count não ultrapassa o array de palavrasTratadas
     if(count + 1 < len(lexico.palavrasTratadas)):
         lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
     else:
-        return
+        error()
 
     # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
@@ -86,25 +88,34 @@ def fases_EPIC():
 def explore():
     global lookahead
     global count
-    # presentList = ['link_pdf','link_video', 'endereço_meet']
-    explorerList = ['20_min;' , '1_hora;' , '1_dia;' , '2_dias;' , 'sem_limite;', '15_min;']
 
+    presentList = ['link_pdf' , 'link_video' , 'endereço_meet']
+    interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
+    lookaheadPreeditivo = ''
 
     # Verifica se o count não ultrapassa o array de palavrasTratadas
-    if(count + 1 < len(lexico.palavrasTratadas)):
-        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
-    else:
+    try:
+        if(count + 1 < len(lexico.palavrasTratadas)):
+            lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
+    except:
+        error()
+        
+    # Se não for presente ou interact RETORNA
+    lookaheadPreeditivoPresent = (lookaheadPreeditivo in presentList)
+    lookaheadPreeditivoInteract = (lookaheadPreeditivo in interactList)
+    if(lookaheadPreeditivoPresent or lookaheadPreeditivoInteract):
         return
 
-    # Se não for explorer RETORNA
-    if(not (lookaheadPreeditivo in explorerList)):
+    if(count + 1 == len(lexico.palavrasTratadas)):
         return
-    elif(lookahead == 'navegador'):
-        matchLookAhead('navegador')
+    
+    if(lookahead == 'navegador'):
+        matchLookAhead('navegador')        
         print('Executando o navegador')
         tempo('navegador')
-        # Recursão do explore
+        # Recursão do explor
         explore()
+
     else:
         error()
 
@@ -141,21 +152,8 @@ def present():
     global lookahead
     global count
 
-    presentList = ['link_pdf' , 'link_video' , 'endereço_meet']
-
-
-    # Verifica se o count não ultrapassa o array de palavrasTratadas
-    if(count + 1 < len(lexico.palavrasTratadas)):
-        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
-    else:
+    if(count + 1 == len(lexico.palavrasTratadas)):
         return
-
-    # Se não for present RETORNA
-    if(not (lookaheadPreeditivo in presentList)):
-        return
-
-    # if(count + 1 == len(lexico.palavrasTratadas)):
-    #     return
     
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
@@ -180,21 +178,8 @@ def interact():
     global lookahead
     global count
 
-    interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
-
-
-    # Verifica se o count não ultrapassa o array de palavrasTratadas
-    if(count + 1 < len(lexico.palavrasTratadas)):
-        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
-    else:
+    if(count + 1 == len(lexico.palavrasTratadas)):
         return
-
-    # Se não for interact RETORNA
-    if(not (lookaheadPreeditivo in interactList)):
-        return
-
-    # if(count + 1 == len(lexico.palavrasTratadas)):
-    #     return
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
@@ -219,22 +204,10 @@ def interact():
 def critique():
     global lookahead
     global count
-
-    interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
-
-
+    
     # Verifica se o count não ultrapassa o array de palavrasTratadas
-    if(count + 1 < len(lexico.palavrasTratadas)):
-        lookaheadPreeditivo = lexico.palavrasTratadas[count + 1]
-    else:
+    if(count + 1 == len(lexico.palavrasTratadas)):
         return
-
-    # Se não for interact RETORNA
-    if(not (lookaheadPreeditivo in interactList)):
-        return
-
-    # if(count + 1 == len(lexico.palavrasTratadas)):
-    #     return
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
@@ -319,17 +292,17 @@ def abrirVideo(tempo):
 
 def timeSleep(tempo):
     if(tempo == '20_min;'):
-        time.sleep(5)
+        time.sleep(3)
     elif(tempo == '1_dia;'):
-        time.sleep(5)
+        time.sleep(3)
     elif(tempo == '2_dias;'):
-        time.sleep(5)
+        time.sleep(3)
     elif(tempo == 'sem_limite;'):
-        time.sleep(5)
-    elif(tempo == '15_min;'):
-        time.sleep(5)
+        time.sleep(3)
+    elif(tempo == '13_min;'):
+        time.sleep(3)
     elif(tempo == '1_hora;'):
-        time.sleep(5)
+        time.sleep(3)
 
 
 # lexico()
