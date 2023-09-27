@@ -72,9 +72,11 @@ def sequencia():
 
     # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
+        print('**FASES_EPIC')
         fases_EPIC()
     # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
+        print('**PRESENT')
         present()
     else:
         error()
@@ -105,6 +107,8 @@ def explore():
     lookaheadPreeditivoInteract = (lookaheadPreeditivo in interactList)
     if(lookaheadPreeditivoPresent or lookaheadPreeditivoInteract):
         return
+    
+    print('**EXPLORER')
 
     if(count + 1 == len(lexico.palavrasTratadas)):
         return
@@ -155,6 +159,8 @@ def present():
     if(count + 1 == len(lexico.palavrasTratadas)):
         return
     
+    print('**PRESENT')
+    
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
         if(lookahead == 'link_pdf'):
@@ -180,6 +186,8 @@ def interact():
 
     if(count + 1 == len(lexico.palavrasTratadas)):
         return
+    
+    print('**INTERACT')
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
@@ -208,6 +216,8 @@ def critique():
     # Verifica se o count não ultrapassa o array de palavrasTratadas
     if(count + 1 == len(lexico.palavrasTratadas)):
         return
+    
+    print('**CRITIQUE')
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')

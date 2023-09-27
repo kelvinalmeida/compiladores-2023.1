@@ -1,5 +1,12 @@
-programa_SOL loop 1
+programa_SOL loop 2
 navegador 1_dia;
-navegador 20_min;
-navegador link_video 1_hora;
-navegador link_email 1_hora;
+navegador link_pdf 20_min;
+navegador endereço_meet sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador link_whatsapp_web sem_limite;
+navegador sem_lidite link_whatsapp_web;
