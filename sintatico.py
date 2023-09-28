@@ -72,11 +72,13 @@ def sequencia():
 
     # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
+        print('------------')
         print('**FASES_EPIC')
+        print('------------')
         fases_EPIC()
     # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
-        print('**PRESENT')
+        # print('**PRESENT')
         present()
     else:
         error()
@@ -91,8 +93,9 @@ def explore():
     global lookahead
     global count
 
-    presentList = ['link_pdf' , 'link_video' , 'endereço_meet']
-    interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
+    explorerList = ['1_dia;' , '20_min;' , '2_dias;', 'sem_limite;', '15_min;', '1_hora;']
+    # presentList = ['link_pdf' , 'link_video' , 'endereço_meet']
+    # interactList = ['link_whatsapp_web' , 'link_email' , 'endereço_meet']
     lookaheadPreeditivo = ''
 
     # Verifica se o count não ultrapassa o array de palavrasTratadas
@@ -103,9 +106,13 @@ def explore():
         error()
         
     # Se não for presente ou interact RETORNA
-    lookaheadPreeditivoPresent = (lookaheadPreeditivo in presentList)
-    lookaheadPreeditivoInteract = (lookaheadPreeditivo in interactList)
-    if(lookaheadPreeditivoPresent or lookaheadPreeditivoInteract):
+    # lookaheadPreeditivoPresent = (lookaheadPreeditivo in presentList)
+    # lookaheadPreeditivoInteract = (lookaheadPreeditivo in interactList)
+    # if(lookaheadPreeditivoPresent or lookaheadPreeditivoInteract):
+    #     return
+
+    # Se não for explorer
+    if(not (lookaheadPreeditivo in explorerList)):
         return
     
     print('**EXPLORER')
@@ -117,6 +124,7 @@ def explore():
         matchLookAhead('navegador')        
         print('Executando o navegador')
         tempo('navegador')
+        print('------------')
         # Recursão do explor
         explore()
 
@@ -180,6 +188,8 @@ def present():
     else:
         error()
 
+    print('------------')
+
 def interact():
     global lookahead
     global count
@@ -208,6 +218,8 @@ def interact():
             error()
     else:
         error()
+
+    print('------------')
 
 def critique():
     global lookahead
@@ -238,6 +250,8 @@ def critique():
             error()
     else:
         error()
+
+    print('------------')
 
 def matchLookAhead(token):
     global lookahead
@@ -309,7 +323,7 @@ def timeSleep(tempo):
         time.sleep(3)
     elif(tempo == 'sem_limite;'):
         time.sleep(3)
-    elif(tempo == '13_min;'):
+    elif(tempo == '15_min;'):
         time.sleep(3)
     elif(tempo == '1_hora;'):
         time.sleep(3)
