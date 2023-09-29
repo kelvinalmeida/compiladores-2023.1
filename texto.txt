@@ -1,2 +1,5 @@
 programa_SOL loop 1
-navegador link_pdf 15_min;
+navegador 1_dia;
+navegador endereço_meet 15_min;
+navegador endereço_meet 15_min;
+navegador endereço_meet 15_min;

@@ -79,6 +79,7 @@ def sequencia():
     # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
         # print('**PRESENT')
+        print('------------')
         present()
     else:
         error()
