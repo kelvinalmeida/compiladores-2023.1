@@ -26,10 +26,14 @@ adiconarLinha = False
 texto = open('texto.txt', 'r', encoding='utf-8')
 lista = texto.readlines()
 
+print(lista)
+
 for i in range(0, len(lista)):
     aux = lista[i].split(' ')
     palavrasDoCodigoFonte = palavrasDoCodigoFonte + aux
 texto.close()
+
+print(palavrasDoCodigoFonte)
 
 # print(palavrasDoCodigoFonte)
 
