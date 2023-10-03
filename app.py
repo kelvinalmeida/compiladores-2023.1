@@ -6,18 +6,13 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-
-# @app.route('/login', methods=['GET', 'POST']):
-#   if flask.request.method == 'POST':
-#     userEmail = request.form['userEmail']
-#     userPassword = request.form['userPassword']
-#     return flask.redirect('/')
-#   return flask.render_template('form_filename.html')
-
 @app.route('/processar_formulario', methods=['POST'])
 def form_post():
     codigoFonteReq = request.form['condigoFonte']
     print(codigoFonteReq)
     
-    # return userEmail
+    # Adicione uma resposta de retorno para a solicitação POST
+    return "Dados do formulário recebidos com sucesso!"
 
+if __name__ == "__main__":
+    app.run()
