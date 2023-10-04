@@ -23,75 +23,86 @@ ignorar = False
 adiconarLinha = False
 
 # Ler o arquivo
-texto = open('texto.txt', 'r', encoding='utf-8')
-lista = texto.readlines()
+# texto = open('texto.txt', 'r', encoding='utf-8')
+# lista = texto.readlines()
 
-print(lista)
+# print(lista)
 
-for i in range(0, len(lista)):
-    aux = lista[i].split(' ')
-    palavrasDoCodigoFonte = palavrasDoCodigoFonte + aux
-texto.close()
-
-print(palavrasDoCodigoFonte)
+# for i in range(0, len(lista)):
+#     aux = lista[i].split(' ')
+#     palavrasDoCodigoFonte = palavrasDoCodigoFonte + aux
+# texto.close()
 
 # print(palavrasDoCodigoFonte)
 
-for i in range(0, len(palavrasDoCodigoFonte)):
+# print(palavrasDoCodigoFonte)
 
-    # Remover Comentários
-    if(palavrasDoCodigoFonte[i][0] in '//' or ignorar):
-        ignorar = True
+def lexicoStart():
+    global palavrasDoCodigoFonte
+    global palavrasTratadas
+    global linha
+    global ignorar
+    global adiconarLinha
+    palavrasTratadas = []
+    linha = 1
+    ignorar = False
+    adiconarLinha = False
 
-        for letra in palavrasDoCodigoFonte[i]:
-            if(letra == '\n'):
+    for i in range(0, len(palavrasDoCodigoFonte)):
+
+        # Remover Comentários
+        if(palavrasDoCodigoFonte[i][0] in '//' or ignorar):
+            ignorar = True
+
+            for letra in palavrasDoCodigoFonte[i]:
+                if(letra == '\r'):
+                        # linha += 1
+                        adiconarLinha = True
+                        ignorar = False
+
+
+        # verificar identificador
+        elif(palavrasDoCodigoFonte[i][0].isalpha()):
+
+            for letra in palavrasDoCodigoFonte[i]:
+                if(letra == '\r'):
                     # linha += 1
                     adiconarLinha = True
-                    ignorar = False
+
+            palavrasDoCodigoFonte[i] = palavrasDoCodigoFonte[i].split()[0]
+            palavrasTratadas.append(palavrasDoCodigoFonte[i].split()[0])
+
+            # Se não estiver escrito corretamente
+            if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
+                print('**Erro Lexico')
+                print('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
+                sys.exit()
+
+        # Verificar digito
+        elif(palavrasDoCodigoFonte[i][0].isdigit()):
+            
+            for letra in palavrasDoCodigoFonte[i]:
+                if(letra == '\r'):
+                    # linha += 1
+                    adiconarLinha = True
+
+            palavrasDoCodigoFonte[i] = palavrasDoCodigoFonte[i].split()[0]
+            palavrasTratadas.append(palavrasDoCodigoFonte[i].split()[0])
+
+            # Se não estiver escrito corretamente
+            if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
+                print('**Erro Lexico')
+                print('Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
+                sys.exit()
+
+        if(adiconarLinha):
+            linha += 1
+            adiconarLinha = False
 
 
-    # verificar identificador
-    elif(palavrasDoCodigoFonte[i][0].isalpha()):
-
-        for letra in palavrasDoCodigoFonte[i]:
-            if(letra == '\n'):
-                # linha += 1
-                adiconarLinha = True
-
-        palavrasDoCodigoFonte[i] = palavrasDoCodigoFonte[i].split()[0]
-        palavrasTratadas.append(palavrasDoCodigoFonte[i].split()[0])
-
-        # Se não estiver escrito corretamente
-        if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
-            print('**Erro Lexico')
-            print('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
-            sys.exit()
-
-    # Verificar digito
-    elif(palavrasDoCodigoFonte[i][0].isdigit()):
-        
-        for letra in palavrasDoCodigoFonte[i]:
-            if(letra == '\n'):
-                # linha += 1
-                adiconarLinha = True
-
-        palavrasDoCodigoFonte[i] = palavrasDoCodigoFonte[i].split()[0]
-        palavrasTratadas.append(palavrasDoCodigoFonte[i].split()[0])
-
-        # Se não estiver escrito corretamente
-        if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
-            print('**Erro Lexico')
-            print('Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
-            sys.exit()
-
-    if(adiconarLinha):
-        linha += 1
-        adiconarLinha = False
-
-
-print()
-# print(palavrasDoCodigoFonte)
-print("**Quantidade de linhas do código fonte: " + str(linha))
-# print(palavrasDoCodigoFonte)
-print("**Palavras do Codigo fonte: " + str(palavrasTratadas))
-print()
+    print()
+    # print(palavrasDoCodigoFonte)
+    print("**Quantidade de linhas do código fonte: " + str(linha))
+    # print(palavrasDoCodigoFonte)
+    print("**Palavras do Codigo fonte: " + str(palavrasTratadas))
+    print()

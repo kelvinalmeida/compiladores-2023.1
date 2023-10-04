@@ -4,14 +4,20 @@ import sys # Para parar o programa apos um erro.
 from selenium import webdriver
 import time
 
-driver = webdriver.Chrome()
 
+driver = webdriver.Chrome()
 count = 0
-lookahead = lexico.palavrasTratadas[count]
+lookahead = ''
 vezesLoop = 1
 
 def parse():
     global lookahead
+    global count
+    global vezesLoop
+    lookahead = lexico.palavrasTratadas[count]
+    count = 0
+    vezesLoop = 1
+    
     if(lookahead == 'programa_SOL'):
         matchLookAhead('programa_SOL')
         programa_SOL()
@@ -331,5 +337,5 @@ def timeSleep(tempo):
 
 
 # lexico()
-parse()
+# parse()
 print()

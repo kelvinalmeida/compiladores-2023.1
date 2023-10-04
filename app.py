@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import lexico
+import sintatico
 
 app = Flask(__name__)
 
@@ -22,9 +24,12 @@ def form_post():
         palaCodigoFonte = palaCodigoFonte + aux
 
     print(palaCodigoFonte)
+    lexico.palavrasDoCodigoFonte = palaCodigoFonte
+    lexico.lexicoStart()
+    sintatico.parse()
     
     # Adicione uma resposta de retorno para a solicitação POST
-    return "Dados do formulário recebidos com sucesso!"
+    return "Comando Executados Com Sucesso!"
 
 if __name__ == "__main__":
     app.run()
