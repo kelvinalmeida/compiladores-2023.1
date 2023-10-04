@@ -11,8 +11,42 @@
     <form action="/processar_formulario" method="post">
         <textarea cols="40" rows="5" id="condigoFonte" name="condigoFonte"></textarea>
         <!-- <input type="text"> -->
-        <button type="submit">Compilar</button>
+        <button type="submit" id="submitBtn">Compilar</button>
     </form>
+    <div id="resultado"></div>
 </body>
+<script>
+    document.getElementById("submitBtn").addEventListener("click", function (event) {
+        event.preventDefault();  // Evita o comportamento padrão do botão de submit
+
+        // Obtenha o valor do campo de entrada
+        const codigoFonte = document.getElementById("condigoFonte").value;
+
+        // Crie um objeto JSON com os dados do formulário
+        const formData = { condigoFonte: codigoFonte };
+
+        // Envie os dados do formulário por AJAX
+        fetch('/processar_formulario', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Faça algo com a resposta JSON do Flask, por exemplo, atualizar o conteúdo na mesma tela
+                console.log(data);
+
+                // Exemplo: atualize uma div com a resposta do Flask
+                const resultadoDiv = document.getElementById("resultado");
+                resultadoDiv.innerHTML = data.mensagem;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    });
+</script>
+
 
 </html>

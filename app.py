@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import lexico
 import sintatico
 
@@ -12,15 +12,33 @@ def index():
 
 @app.route('/processar_formulario', methods=['POST'])
 def form_post():
-    codigoFonteReq = request.form['condigoFonte']
-    print(codigoFonteReq)
-    ReqCodigoFont = codigoFonteReq.split(' ')
-    ReqCodigoFont = codigoFonteReq.split('\n')
+    data = request.json  # Obtenha os dados JSON da solicitação
+    # print(data['condigoFonte'])
+    codigoFonteReq = data['condigoFonte']
+
+    linhas = codigoFonteReq.split('\n')
+
+    tokens_com_quebras_de_linha = []
+
+    # Processar cada linha
+    for i in range(0, len(linhas)):
+        aux = []
+        if(i < len(linhas) - 1):
+            aux.append(linhas[i])
+            aux.append('\n')
+            string = ''.join(aux)
+            tokens_com_quebras_de_linha.append(string)
+        else:
+            tokens_com_quebras_de_linha.append(linhas[i])
+
+    # aux3 = tokens_com_quebras_de_linha[len(tokens_com_quebras_de_linha) - 1]
+    print(tokens_com_quebras_de_linha)
+
 
     global palaCodigoFonte
     palaCodigoFonte = []
-    for i in range(0, len(ReqCodigoFont)):
-        aux = ReqCodigoFont[i].split(' ')
+    for i in range(0, len(tokens_com_quebras_de_linha)):
+        aux = tokens_com_quebras_de_linha[i].split(' ')
         palaCodigoFonte = palaCodigoFonte + aux
 
     print(palaCodigoFonte)
@@ -29,7 +47,10 @@ def form_post():
     sintatico.parse()
     
     # Adicione uma resposta de retorno para a solicitação POST
-    return "Comando Executados Com Sucesso!"
+    # return "Comando Executados Com Sucesso!"
+    resultado = {'mensagem': 'Solicitação AJAX bem-sucedida'}
+    return jsonify(resultado)  
+    
 
 if __name__ == "__main__":
     app.run()

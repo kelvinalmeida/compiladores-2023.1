@@ -55,7 +55,7 @@ def lexicoStart():
             ignorar = True
 
             for letra in palavrasDoCodigoFonte[i]:
-                if(letra == '\r'):
+                if(letra == '\n'):
                         # linha += 1
                         adiconarLinha = True
                         ignorar = False
@@ -65,7 +65,7 @@ def lexicoStart():
         elif(palavrasDoCodigoFonte[i][0].isalpha()):
 
             for letra in palavrasDoCodigoFonte[i]:
-                if(letra == '\r'):
+                if(letra == '\n'):
                     # linha += 1
                     adiconarLinha = True
 
@@ -82,7 +82,7 @@ def lexicoStart():
         elif(palavrasDoCodigoFonte[i][0].isdigit()):
             
             for letra in palavrasDoCodigoFonte[i]:
-                if(letra == '\r'):
+                if(letra == '\n'):
                     # linha += 1
                     adiconarLinha = True
 

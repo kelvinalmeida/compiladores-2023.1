@@ -14,8 +14,8 @@ def parse():
     global lookahead
     global count
     global vezesLoop
-    lookahead = lexico.palavrasTratadas[count]
     count = 0
+    lookahead = lexico.palavrasTratadas[count]
     vezesLoop = 1
     
     if(lookahead == 'programa_SOL'):
