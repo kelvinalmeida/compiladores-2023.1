@@ -21,6 +21,7 @@ palavrasTratadas = []
 linha = 1
 ignorar = False
 adiconarLinha = False
+comentarios = []
 
 # Ler o arquivo
 # texto = open('texto.txt', 'r', encoding='utf-8')
@@ -43,10 +44,12 @@ def lexicoStart():
     global linha
     global ignorar
     global adiconarLinha
+    global comentarios
     palavrasTratadas = []
     linha = 1
     ignorar = False
     adiconarLinha = False
+    comentarios = []
 
     for i in range(0, len(palavrasDoCodigoFonte)):
 
@@ -76,6 +79,8 @@ def lexicoStart():
             if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
                 print('**Erro Lexico')
                 print('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
+                comentarios.append('**Erro Lexico')
+                comentarios.append('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
                 sys.exit()
 
         # Verificar digito
@@ -93,6 +98,8 @@ def lexicoStart():
             if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
                 print('**Erro Lexico')
                 print('Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
+                comentarios.append('**Erro Lexico')
+                comentarios.append('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
                 sys.exit()
 
         if(adiconarLinha):
@@ -106,3 +113,6 @@ def lexicoStart():
     # print(palavrasDoCodigoFonte)
     print("**Palavras do Codigo fonte: " + str(palavrasTratadas))
     print()
+
+    comentarios.append("**Quantidade de linhas do código fonte: " + str(linha) + '<br>')
+    comentarios.append("**Palavras do Codigo fonte: " + str(palavrasTratadas) + '<br>')

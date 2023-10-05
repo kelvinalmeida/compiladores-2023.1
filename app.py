@@ -45,10 +45,14 @@ def form_post():
     lexico.palavrasDoCodigoFonte = palaCodigoFonte
     lexico.lexicoStart()
     sintatico.parse()
+
+    exibirResposta = ' '.join(lexico.comentarios)
+
+    print('---> ' + exibirResposta)
     
     # Adicione uma resposta de retorno para a solicitação POST
     # return "Comando Executados Com Sucesso!"
-    resultado = {'mensagem': 'Solicitação AJAX bem-sucedida'}
+    resultado = {'mensagem': exibirResposta}
     return jsonify(resultado)  
     
 

@@ -79,13 +79,17 @@ def sequencia():
     # ir para fases_EPIC
     if((lookahead == 'navegador') and (lookaheadPreeditivo in fase_EPIC)):
         print('------------')
+        lexico.comentarios.append('------------' + '<br>')
         print('**FASES_EPIC')
+        lexico.comentarios.append('**FASES_EPIC' + '<br>')
         print('------------')
+        lexico.comentarios.append('------------' + '<br>')
         fases_EPIC()
     # Ir para Present
     elif((lookahead == 'navegador') and (lookaheadPreeditivo in presentList)):
         # print('**PRESENT')
         print('------------')
+        lexico.comentarios.append('------------' + '<br>')
         present()
     else:
         error()
@@ -123,6 +127,7 @@ def explore():
         return
     
     print('**EXPLORER')
+    lexico.comentarios.append('**EXPLORER' + '<br>')
 
     if(count + 1 == len(lexico.palavrasTratadas)):
         return
@@ -130,8 +135,10 @@ def explore():
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')        
         print('Executando o navegador')
+        lexico.comentarios.append('Executando o navegador' + '<br>')
         tempo('navegador')
         print('------------')
+        lexico.comentarios.append('------------' + '<br>')
         # Recursão do explor
         explore()
 
@@ -143,26 +150,32 @@ def tempo(tipo):
     if(lookahead == '20_min;'):
         matchLookAhead('20_min;')
         print('por 20_min')
+        lexico.comentarios.append('por 20_min' + '<br>')
         abrirComandos(tipo, '20_min;')
     elif(lookahead == '1_dia;'):
         matchLookAhead('1_dia;')
         print('por 1_dia')
+        lexico.comentarios.append('por 1_dia' + '<br>')
         abrirComandos(tipo, '1_dia;')
     elif(lookahead == '2_dias;'):
         matchLookAhead('2_dias;')
         print('por 2_dias')
+        lexico.comentarios.append('por 2_dias' + '<br>')
         abrirComandos(tipo, '2_dias;')
     elif(lookahead == 'sem_limite;'):
         matchLookAhead('sem_limite;')
         print('por sem_limite')
+        lexico.comentarios.append('por sem_limite' + '<br>')
         abrirComandos(tipo, 'sem_limite;')
     elif(lookahead == '15_min;'):
         matchLookAhead('15_min;')
         print('por 15_min')
+        lexico.comentarios.append('por 15_min' + '<br>')
         abrirComandos(tipo, '15_min;')
     elif(lookahead == '1_hora;'):
         matchLookAhead('1_hora;')
         print('por 1_hora')
+        lexico.comentarios.append('por 1_hora' + '<br>')
         abrirComandos(tipo, '1_hora;')
     else:
         error()
@@ -175,20 +188,24 @@ def present():
         return
     
     print('**PRESENT')
+    lexico.comentarios.append('**PRESENT' + '<br>')
     
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
         if(lookahead == 'link_pdf'):
             matchLookAhead('link_pdf')
             print('executar link_pdf.')
+            lexico.comentarios.append('executar link_pdf.' + '<br>')
             tempo('link_pdf')
         elif(lookahead == 'link_video'):
             matchLookAhead('link_video')            
             print('executar link_video.')
+            lexico.comentarios.append('executar link_video.' + '<br>')
             tempo('link_video')
         elif(lookahead == 'endereço_meet'):
             matchLookAhead('endereço_meet')            
             print('executar endereço_meet.')
+            lexico.comentarios.append('executar endereço_meet.' + '<br>')
             tempo('endereço_meet')
         else:
             error()
@@ -196,6 +213,7 @@ def present():
         error()
 
     print('------------')
+    lexico.comentarios.append('------------' + '<br>')
 
 def interact():
     global lookahead
@@ -205,21 +223,25 @@ def interact():
         return
     
     print('**INTERACT')
+    lexico.comentarios.append('**INTERACT' + '<br>')
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
         if(lookahead == 'link_whatsapp_web'):
             matchLookAhead('link_whatsapp_web')
             print('executar link_whatsapp_web.')
+            lexico.comentarios.append('executar link_whatsapp_web.' + '<br>')
             tempo('link_whatsapp_web')
         elif(lookahead == 'link_email'):
             matchLookAhead('link_email')
             print('executar link_email.')
+            lexico.comentarios.append('executar link_email.' + '<br>')
             tempo('link_email')
 
         elif(lookahead == 'endereço_meet'):
             matchLookAhead('endereço_meet')
             print('executar endereço_meet.')
+            lexico.comentarios.append('executar endereço_meet.' + '<br>')
             tempo('endereço_meet')
         else:
             error()
@@ -227,6 +249,7 @@ def interact():
         error()
 
     print('------------')
+    lexico.comentarios.append('------------' + '<br>')
 
 def critique():
     global lookahead
@@ -237,21 +260,25 @@ def critique():
         return
     
     print('**CRITIQUE')
+    lexico.comentarios.append('**CRITIQUE' + '<br>')
 
     if(lookahead == 'navegador'):
         matchLookAhead('navegador')
         if(lookahead == 'link_whatsapp_web'):
             matchLookAhead('link_whatsapp_web')
             print('executar link_whatsapp_web.')
+            lexico.comentarios.append('executar link_whatsapp_web.' + '<br>')
             tempo('link_whatsapp_web')
         elif(lookahead == 'link_email'):
             matchLookAhead('link_email')
             print('executar link_email.')
+            lexico.comentarios.append('executar link_email.' + '<br>')
             tempo('link_email')
 
         elif(lookahead == 'endereço_meet'):
             matchLookAhead('endereço_meet')
             print('executar endereço_meet.')
+            lexico.comentarios.append('executar endereço_meet.' + '<br>')
             tempo('endereço_meet')
         else:
             error()
@@ -259,6 +286,7 @@ def critique():
         error()
 
     print('------------')
+    lexico.comentarios.append('------------' + '<br>')
 
 def matchLookAhead(token):
     global lookahead
@@ -272,7 +300,9 @@ def matchLookAhead(token):
 
 def error():
     print('Erro Sintatico')
+    lexico.comentarios.append('Erro Sintatico' + '<br>')
     print()
+    lexico.comentarios.append('<br>')
     sys.exit()
 
 
