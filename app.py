@@ -43,8 +43,11 @@ def form_post():
 
     print(palaCodigoFonte)
     lexico.palavrasDoCodigoFonte = palaCodigoFonte
+
     lexico.lexicoStart()
-    sintatico.parse()
+
+    if(not lexico.erroLexico):
+        sintatico.parse()
 
     exibirResposta = ' '.join(lexico.comentarios)
 

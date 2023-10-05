@@ -22,6 +22,7 @@ linha = 1
 ignorar = False
 adiconarLinha = False
 comentarios = []
+erroLexico = False
 
 # Ler o arquivo
 # texto = open('texto.txt', 'r', encoding='utf-8')
@@ -45,11 +46,13 @@ def lexicoStart():
     global ignorar
     global adiconarLinha
     global comentarios
+    global erroLexico
     palavrasTratadas = []
     linha = 1
     ignorar = False
     adiconarLinha = False
     comentarios = []
+    erroLexico = False
 
     for i in range(0, len(palavrasDoCodigoFonte)):
 
@@ -79,9 +82,10 @@ def lexicoStart():
             if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
                 print('**Erro Lexico')
                 print('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
-                comentarios.append('**Erro Lexico')
-                comentarios.append('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
-                sys.exit()
+                comentarios.append('**Erro Lexico' + '<br>')
+                comentarios.append('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha) + '<br>')
+                erroLexico = True
+                return
 
         # Verificar digito
         elif(palavrasDoCodigoFonte[i][0].isdigit()):
@@ -98,9 +102,10 @@ def lexicoStart():
             if(not (escritoCorretamente(palavrasDoCodigoFonte[i]))):
                 print('**Erro Lexico')
                 print('Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
-                comentarios.append('**Erro Lexico')
-                comentarios.append('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha))
-                sys.exit()
+                comentarios.append('**Erro Lexico' + '<br>')
+                comentarios.append('**Erro com a palavra ' + '\'' + palavrasDoCodigoFonte[i] + '\'' + ' na linha ' + str(linha + 1 if linha  == 0 else linha) + '<br>')
+                erroLexico = True
+                return
 
         if(adiconarLinha):
             linha += 1

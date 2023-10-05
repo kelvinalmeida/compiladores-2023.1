@@ -9,11 +9,15 @@ driver = webdriver.Chrome()
 count = 0
 lookahead = ''
 vezesLoop = 1
+errorReturn = False
 
 def parse():
     global lookahead
     global count
     global vezesLoop
+    global errorReturn
+
+    errorReturn = False
     count = 0
     lookahead = lexico.palavrasTratadas[count]
     vezesLoop = 1
@@ -26,6 +30,11 @@ def parse():
 
 
 def programa_SOL():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     global count
     global vezesLoop
@@ -45,6 +54,11 @@ def programa_SOL():
         error()
     
 def vezes():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     if(lookahead == '1'):
         matchLookAhead('1')
@@ -65,6 +79,11 @@ def vezes():
         error()
 
 def sequencia():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     fase_EPIC = ['20_min;', '1_hora;', '1_dia;', '2_dias;', 'sem_limite;', '15_min;']
     presentList = ['link_pdf','link_video', 'endereço_meet']
@@ -95,12 +114,22 @@ def sequencia():
         error()
 
 def fases_EPIC():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     explore()
     present()
     interact()
     critique()
 
 def explore():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     global count
 
@@ -146,6 +175,11 @@ def explore():
         error()
 
 def tempo(tipo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     if(lookahead == '20_min;'):
         matchLookAhead('20_min;')
@@ -181,6 +215,11 @@ def tempo(tipo):
         error()
 
 def present():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     global count
 
@@ -216,6 +255,11 @@ def present():
     lexico.comentarios.append('------------' + '<br>')
 
 def interact():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     global count
 
@@ -252,6 +296,11 @@ def interact():
     lexico.comentarios.append('------------' + '<br>')
 
 def critique():
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     global count
     
@@ -289,6 +338,11 @@ def critique():
     lexico.comentarios.append('------------' + '<br>')
 
 def matchLookAhead(token):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global lookahead
     global count
     if(token == lookahead):
@@ -299,14 +353,22 @@ def matchLookAhead(token):
         error()
 
 def error():
+    
+    global errorReturn
+    errorReturn = True
     print('Erro Sintatico')
     lexico.comentarios.append('Erro Sintatico' + '<br>')
     print()
     lexico.comentarios.append('<br>')
-    sys.exit()
+    # sys.exit()
 
 
 def abrirComandos(tipo, tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     if(tipo == 'navegador'):
         abrirNavegador(tempo)
     elif(tipo == 'link_pdf'):
@@ -322,36 +384,71 @@ def abrirComandos(tipo, tempo):
 
 
 def abrirNavegador(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global driver
     driver.get("https://google.com/")
     timeSleep(tempo)
 
 def abrirVideoConferencia(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global driver
     driver.get("https://meet.google.com/")
     timeSleep(tempo)
 
 def abrirWhatsappWeb(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global driver
     driver.get("https://web.whatsapp.com/")
     timeSleep(tempo)
 
 def abrirEmail(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global driver
     driver.get("https://mail.google.com/")
     timeSleep(tempo)
 
 def abrirPDF(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global driver
     driver.get("https://inc.saude.gov.br/download/50_receitas.pdf")
     timeSleep(tempo)
 
 def abrirVideo(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     global driver
     driver.get("https://www.youtube.com/")
     timeSleep(tempo)
 
 def timeSleep(tempo):
+    
+    global errorReturn
+    if(errorReturn):
+        return
+    
     if(tempo == '20_min;'):
         time.sleep(3)
     elif(tempo == '1_dia;'):
